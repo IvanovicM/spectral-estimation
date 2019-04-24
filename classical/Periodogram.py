@@ -12,6 +12,8 @@ class Periodogram():
     def __init__(self):
         self.f = None
         self.default_f = np.linspace(0, 0.5, 500)
+        self.x = None
+        self.P = None
 
     def estimate(self, x, f=None):
         '''
@@ -35,14 +37,14 @@ class Periodogram():
             sum = 0
             for n in range(self.N):
                 sum += self.x[n] * cmath.exp(-1j * 2*cmath.pi * self.f[i] * n)
-            self.P[i] = pow(abs(sum), 2) / self.N / 50
+            self.P[i] = pow(abs(sum), 2) / self.N
 
     def plot(self):
         '''
             Plots estimated P.
         '''
         # Check if anything is estimated.
-        if self.f is None:
+        if self.f is None or self.P is None:
             return
 
         plt.figure()
@@ -72,3 +74,15 @@ class Periodogram():
         plt.ylabel('P')
         plt.ylim(bottom=1e-5)
         plt.show()
+
+    def __getitem__(self, key):
+        '''
+            Returns the value for given key, or None if the key is not allowed.
+        '''
+        if key == 'f':
+            return self.f
+        if key == 'P':
+            return self.P
+        if key == 'x':
+            return self.x
+        return None
