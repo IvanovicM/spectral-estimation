@@ -78,8 +78,6 @@ class Autocorrelation():
         '''
             Returns r_xx[key].
         '''
-        if not isinstance(key, int):
-            return None
         if self.r_xx is None:
             return None
 

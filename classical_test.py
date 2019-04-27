@@ -2,6 +2,8 @@ import numpy as np
 from classical.Periodogram import Periodogram
 from classical.AveragedPeriodogram import AveragedPeriodogram
 from classical.Autocorrelation import Autocorrelation
+from classical.BlackmanTukey import BlackmanTukey
+from classical.BlackmanTukey import TriangWindow
 
 def periodogram_test():
     x = np.random.normal(size=100)
@@ -36,7 +38,16 @@ def autocorrelation_test():
     # Comparation
     r_xx.compare(x)
 
+def blackmantukey_test():
+    x = np.random.normal(size=1000)
+    bm = BlackmanTukey()
+
+    # Estimation
+    bm.estimate(x)
+    bm.plot()
+
 if __name__ == "__main__":
     #periodogram_test()
     #averaged_periodogram_test()
-    autocorrelation_test()
+    #autocorrelation_test()
+    blackmantukey_test()
