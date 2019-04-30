@@ -6,7 +6,8 @@ from classical.BlackmanTukey import BlackmanTukey
 from classical.BlackmanTukey import TriangWindow
 
 def periodogram_test():
-    x = np.random.normal(size=100)
+    t = np.arange(256)
+    x = np.sin(1*t + 2.8) + np.sin(2*t + 3.4)
     per = Periodogram()
 
     # Estimation
@@ -17,7 +18,8 @@ def periodogram_test():
     per.compare(x)
 
 def averaged_periodogram_test():
-    x = np.random.normal(size=1000)
+    t = np.arange(256)
+    x = np.sin(1*t + 2.8) + np.sin(2*t + 3.4)
     per = AveragedPeriodogram()
 
     # Estimation
@@ -39,7 +41,8 @@ def autocorrelation_test():
     r_xx.compare(x)
 
 def blackmantukey_test():
-    x = np.random.normal(size=1000)
+    t = np.arange(256)
+    x = np.sin(1*t + 2.8) + np.sin(2*t + 3.4)
     bm = BlackmanTukey()
 
     # Estimation
