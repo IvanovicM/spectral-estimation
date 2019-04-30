@@ -3,6 +3,7 @@ from scipy import signal
 from parametric.Autocorrelation import Autocorrelation
 from parametric.AutocorrelationMethod import AutocorrelationMethod
 from parametric.CovarianceMethod import CovarianceMethod
+from parametric.ModifiedCovarianceMethod import ModifiedCovarianceMethod
 
 def autocorrelation_method_test():
     t = np.arange(1000)
@@ -27,16 +28,29 @@ def autocorrelation_test():
 def covariance_method_test():
     t = np.arange(1000)
     x = np.sin(1*t + 2.8) + np.sin(2*t + 3.4)
-    #x = np.random.normal(size=1000)
+    u = np.random.normal(size=1000)
     cov_method = CovarianceMethod()
 
     # Estimation
-    cov_method.estimate(x, p=4)
+    cov_method.estimate(np.add(x, u), p=4)
     cov_method.plot()
 
     print('var_u: ', cov_method['var_u'])
 
+def modified_covariance_method_test():
+    t = np.arange(1000)
+    x = np.sin(1*t + 2.8) + np.sin(2*t + 3.4)
+    u = np.random.normal(size=1000)
+    mod_cov_method = ModifiedCovarianceMethod()
+
+    # Estimation
+    mod_cov_method.estimate(np.add(x, u), p=4)
+    mod_cov_method.plot()
+
+    print('var_u: ', mod_cov_method['var_u'])
+
 if __name__ == "__main__":
     #autocorrelation_test()
     #autocorrelation_method_test()
-    covariance_method_test()
+    #covariance_method_test()
+    modified_covariance_method_test()
