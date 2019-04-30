@@ -28,7 +28,7 @@ class Autocorrelation():
         for n in range(self.N):
             sum = 0
             for m in range(self.N - 1 - n):
-                sum += np.conjugate(self.x[m] * self.x[m + n])
+                sum += np.conjugate(self.x[m]) * self.x[m + n]
             self.r_xx[n] = sum / self.N
 
     def plot(self):
