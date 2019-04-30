@@ -4,10 +4,8 @@ from parametric.Autocorrelation import Autocorrelation
 from parametric.AutocorrelationMethod import AutocorrelationMethod
 
 def autocorrelation_method_test():
-    u = np.random.normal(size=256)
-    b = [1]
-    a = [1, -2.760, 3.809, -2.654, 0.924]
-    x = signal.filtfilt(b, a, u)
+    t = np.arange(1000)
+    x = np.sin(1*t + 2.8) + np.sin(2*t + 3.4)
     autocorr_method = AutocorrelationMethod()
 
     # Estimation
