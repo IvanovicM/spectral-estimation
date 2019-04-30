@@ -52,19 +52,20 @@ class AutocorrelationMethod():
         for i in range(p):
             rxx_vec[i] = self.r_xx[i + 1]
 
-        # Calculate a
+        # Calculate a and append [1] for a[0]
         self.a = np.matmul(-np.linalg.inv(Rxx),
                            rxx_vec)
+        self.a = np.append([[1]], self.a, axis=0)
 
         # Calculate var_u
-        self.var_u = self.r_xx[0]
-        for i in range(p):
+        self.var_u = 0
+        for i in range(p + 1):
             self.var_u += self.a[i] * self.r_xx[-i]
 
         # Calculate P
         for fi in range(len(self.f)):
             A = 0
-            for i in range(self.p):
+            for i in range(p + 1):
                 A += self.a[i] * cmath.exp(-1j * 2*cmath.pi * self.f[fi] * i)
             self.P[fi] = self.var_u / pow(abs(A), 2)
 
@@ -77,7 +78,7 @@ class AutocorrelationMethod():
             return
 
         plt.figure()
-        plt.semilogy(self.f, self.P)
+        plt.semilogy(self.f * 2*cmath.pi, self.P)
         plt.title('Autocorrelation method estimation')
         plt.xlabel('f [Hz]')
         plt.ylabel('P')
