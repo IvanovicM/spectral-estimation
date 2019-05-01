@@ -81,7 +81,7 @@ class AveragedPeriodogram():
         plt.semilogy(self.f, self.P, 'b', label='averaged periodogram')
         plt.semilogy(f_per, P_per, 'r--', label='scipy.signal')
         plt.legend()
-        plt.title('Periodogram comparation')
+        plt.title('Averaged periodogram comparation')
         plt.xlabel('f [Hz]')
         plt.ylabel('P')
         plt.ylim(bottom=1e-5)
