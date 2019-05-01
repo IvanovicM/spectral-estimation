@@ -74,7 +74,7 @@ def apply_parametric_methods(x):
     cov.estimate(x[rand_index][:], p=5)
     cov.plot()
     
-    # Modified ovariance method
+    # Modified covariance method
     rand_index = randint(0, np.shape(x)[0])
     mod_cov = ModifiedCovarianceMethod()
     mod_cov.estimate(x[rand_index][:], p=5)
@@ -83,7 +83,7 @@ def apply_parametric_methods(x):
     # Burg method
     # TODO
 
-def window_closing_on_blakman_tukey(x):
+def window_closing_on_blackman_tukey(x):
     rand_index = randint(0, np.shape(x)[0])
     xr = x[rand_index][:]
 
@@ -99,6 +99,43 @@ def window_closing_on_blakman_tukey(x):
     plt.ylabel('P')
     plt.show()
 
+def apply_and_plot_all(x):
+    # Periodogram
+    per = Periodogram()
+    plt.figure()
+    for i in range(np.shape(x)[0]):
+        print('Estimating:', i)
+        per.estimate(x[i][:])
+        plt.semilogy(per['f'], per['P'])
+    plt.title('Periodogram on all realisations')
+    plt.xlabel('f [Hz]')
+    plt.ylabel('P')
+    plt.show()
+
+    # CovarianceMethod
+    cov = CovarianceMethod()
+    plt.figure()
+    for i in range(np.shape(x)[0]):
+        print('Estimating:', i)
+        cov.estimate(x[i][:], p=5)
+        plt.semilogy(cov['f'], cov['P'])
+    plt.title('Covariance method on all realisations')
+    plt.xlabel('f [Hz]')
+    plt.ylabel('P')
+    plt.show()
+
+    # Blackman-Tukey
+    bm = BlackmanTukey()
+    plt.figure()
+    for i in range(np.shape(x)[0]):
+        print('Estimating:', i)
+        bm.estimate(x[i][:], M=10)
+        plt.semilogy(bm['f'], bm['P'])
+    plt.title('Blackman-Tukey on all realisations')
+    plt.xlabel('f [Hz]')
+    plt.ylabel('P')
+    plt.show()
+
 if __name__ == '__main__':
     # Read data
     x = read_data('data/data.csv', delimiter=',', file_size=[50, 256])
@@ -109,4 +146,7 @@ if __name__ == '__main__':
     #apply_parametric_methods(x)
 
     # Apply window closing and show results
-    window_closing_on_blakman_tukey(x)
+    #window_closing_on_blackman_tukey(x)
+
+    # Apply all realizations
+    apply_and_plot_all(x)
