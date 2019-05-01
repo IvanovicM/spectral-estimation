@@ -14,6 +14,8 @@ def autocorrelation_method_test():
     autocorr_method.estimate(x, p=4)
     autocorr_method.plot()
 
+    print('AutocorrelationMethod, var_u: ', autocorr_method['var_u'])
+
 def autocorrelation_test():
     x = np.random.normal(size=1000)
     r_xx = Autocorrelation()
@@ -35,7 +37,7 @@ def covariance_method_test():
     cov_method.estimate(np.add(x, u), p=4)
     cov_method.plot()
 
-    print('var_u: ', cov_method['var_u'])
+    print('CovarianceMethod, var_u: ', cov_method['var_u'])
 
 def modified_covariance_method_test():
     t = np.arange(1000)
@@ -47,10 +49,10 @@ def modified_covariance_method_test():
     mod_cov_method.estimate(np.add(x, u), p=4)
     mod_cov_method.plot()
 
-    print('var_u: ', mod_cov_method['var_u'])
+    print('ModifiedCovarianceMethod, var_u: ', mod_cov_method['var_u'])
 
 if __name__ == "__main__":
     #autocorrelation_test()
-    #autocorrelation_method_test()
-    #covariance_method_test()
+    autocorrelation_method_test()
+    covariance_method_test()
     modified_covariance_method_test()
