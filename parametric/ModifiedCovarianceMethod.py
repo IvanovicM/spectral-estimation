@@ -96,7 +96,7 @@ class ModifiedCovarianceMethod():
 
         plt.figure()
         plt.semilogy(self.f * 2*cmath.pi, self.P)
-        plt.title('Covariance method estimation')
+        plt.title('Modified covariance method estimation')
         plt.xlabel('w [Hz]')
         plt.ylabel('P')
         plt.show()

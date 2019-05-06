@@ -177,7 +177,7 @@ def filter_and_autocorr(x):
     # Plot result
     plt.figure()
     plt.plot(y)
-    plt.title('Fitered signal')
+    plt.title('Filtered signal')
     plt.xlabel('t [s]')
     plt.show()
 

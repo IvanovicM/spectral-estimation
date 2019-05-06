@@ -116,6 +116,8 @@ class TriangWindow():
             Plots triangle window.
         '''
         window_plot = self._double_side_window()
+        window_plot = np.append([0], window_plot)
+        window_plot = np.append(window_plot, [0])
 
         plt.figure()
         plt.plot(np.arange(-len(window_plot)//2 + 1, len(window_plot)//2 + 1), window_plot)
