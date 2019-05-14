@@ -1,7 +1,7 @@
 import numpy as np
 import math
 
-class MeanAndVar:
+class MeanAndVar():
 
     def __init__(self):
         self.mean = None
@@ -19,22 +19,34 @@ class MeanAndVar:
         if x is None:
             return
             
-        self.Nr = np.shape(x)[0]
-        self.N = np.shape(x)[1]
+        x_shape = np.shape(x)
+        self.Nr = x_shape[0]
+        if np.shape(x_shape)[0] == 1:
+            self.N = 1
+        else:
+            self.N = x_shape[1]
         if self.Nr == 0 or self.N == 0:
             return
 
         # Estimate mean.
         self.mean = np.zeros(self.N)
         for nr in range(self.Nr):
-            self.mean = np.add(self.mean, x[nr][:])
+            if self.N == 1:
+                curr_x = x[nr]
+            else:
+                curr_x = x[nr][:]
+            self.mean = np.add(self.mean, curr_x)
         self.mean /= self.Nr
 
         # Estimate var.
         self.var = np.zeros(self.N)
         for nr in range(self.Nr):
             for n in range(self.N):
-                self.var[n] += pow(x[nr][n] - self.mean[n], 2)
+                if self.N == 1:
+                    curr_x = x[nr]
+                else:
+                    curr_x = x[nr][:]
+                self.var[n] += pow(curr_x - self.mean[n], 2)
         self.var /= (self.Nr - 1)
 
     def __getitem__(self, key):

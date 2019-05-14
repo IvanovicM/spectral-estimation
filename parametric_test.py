@@ -4,6 +4,8 @@ from parametric.Autocorrelation import Autocorrelation
 from parametric.AutocorrelationMethod import AutocorrelationMethod
 from parametric.CovarianceMethod import CovarianceMethod
 from parametric.ModifiedCovarianceMethod import ModifiedCovarianceMethod
+from utils.MeanAndVar import MeanAndVar
+from utils.ModelOrderSelector import ModelOrderSelector
 
 def autocorrelation_method_test():
     t = np.arange(1000)
@@ -51,8 +53,31 @@ def modified_covariance_method_test():
 
     print('ModifiedCovarianceMethod, var_u: ', mod_cov_method['var_u'])
 
+def model_order_selector_test():
+    N = 1000
+    t = np.arange(N)
+    x = np.sin(1*t + 2.8) + np.sin(2*t + 3.4)
+    u = np.random.normal(size=N)
+
+    mv = MeanAndVar()
+    selector = ModelOrderSelector()
+    autocorr = ModifiedCovarianceMethod()
+
+    # Estimation + variance for various p
+    max_p = 10
+    rho = np.zeros(max_p + 1)
+    for p in np.arange(1, max_p + 1):
+        autocorr.estimate(np.add(x, u), p=p)
+        mv.estimate(np.transpose(autocorr['P']))
+        rho[p] = mv['var']
+
+    # Apply order selection
+    selector.apply('FPE', N, max_p, rho)
+    selector.plot()
+
 if __name__ == "__main__":
     #autocorrelation_test()
-    autocorrelation_method_test()
-    covariance_method_test()
-    modified_covariance_method_test()
+    #autocorrelation_method_test()
+    #covariance_method_test()
+    #modified_covariance_method_test()
+    model_order_selector_test()
