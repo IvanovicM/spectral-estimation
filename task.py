@@ -200,7 +200,7 @@ def filter_and_autocorr(x):
     # Apply filter
     b = np.ndarray.flatten(cov['a'])
     a = [1]
-    y = signal.filtfilt(b, a, x[rand_index][:])
+    y = signal.lfilter(b, a, x[rand_index][:])
 
     # Plot result
     plt.figure()
@@ -242,10 +242,10 @@ if __name__ == '__main__':
     #model_order_selection(x, method='FPE')
 
     # 6. Filter sequence and show autocorrelation onf the result.
-    #filter_and_autocorr(x)
+    filter_and_autocorr(x)
 
     # 7. Apply a few methods on all realisations
-    apply_and_plot_all(x)
+    #apply_and_plot_all(x)
 
     # 8. Show estimated variance for Covariance method.
     #show_variance_for_covariance_method(x, 10)
