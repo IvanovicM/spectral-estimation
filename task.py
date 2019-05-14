@@ -141,27 +141,37 @@ def apply_and_plot_all(x):
     plt.show()
 
 def apply_and_plot_with_order(x, p):
+    Nr = np.shape(x)[0]
+    N = np.shape(x)[1]
     cov = CovarianceMethod()
+    mv = MeanAndVar()
+
+    f_len = 100
+    f = np.linspace(0, 0.5, f_len)
     
     for p_i in p:
         _, axarr = plt.subplots(1, 2)
         var = np.zeros(np.shape(x)[0])
 
-        # Plot estimations for current p_i
-        for i in range(np.shape(x)[0]):
-            print('Estimating:', i)
-            cov.estimate(x[i][:], p=p_i)
+        # Estimate and plot P for current p_i
+        estimated_P = np.zeros(shape=[Nr, f_len])
+        for nr in range(np.shape(x)[0]):
+            print('Estimating:', nr)
+            cov.estimate(x[nr][:], f=f, p=p_i)
 
-            axarr[0].semilogy(cov['f'], cov['P'])
-            var[i] = cov['var_u']
+            axarr[0].semilogy(f, cov['P'])
+            estimated_P[nr][:] = cov['P']
+
+        # Plot variance.
+        mv.estimate(estimated_P)
+        axarr[1].plot(f, mv['var'])
 
         # Label subplots
         axarr[0].set_title('Covariance method for p = {}'.format(p_i))
         axarr[0].set(xlabel='f [Hz]', ylabel='P [dB]')
 
-        axarr[1].stem(var)
         axarr[1].set_title('Variance for p = {}'.format(p_i))
-        axarr[1].set(xlabel='realisation', ylabel='var')
+        axarr[1].set(xlabel='f [Hz]', ylabel='var')
         
         # Show current plot
         plt.show()
@@ -251,9 +261,9 @@ if __name__ == '__main__':
     #apply_and_plot_all(x)
 
     # 8. Show estimated variance for Covariance method.
-    show_variance_for_covariance_method(x, 10)
+    #show_variance_for_covariance_method(x, 10)
 
     # 9. Apply Covariance method with different orders.
-    #N = 256
-    #apply_and_plot_with_order(x, [N//2, N//4])
+    N = 256
+    apply_and_plot_with_order(x, [N // 2, N // 4])
     
