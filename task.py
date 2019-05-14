@@ -166,6 +166,35 @@ def apply_and_plot_with_order(x, p):
         # Show current plot
         plt.show()
 
+def show_variance_for_covariance_method(x, p):
+    Nr = np.shape(x)[0]
+    N = np.shape(x)[1]
+    cov = CovarianceMethod()
+    mv = MeanAndVar()
+
+    _, axarr = plt.subplots(1, 2)
+    i_ax = 0
+    f_len = 100
+    f = np.linspace(0, 0.5, f_len)
+
+    for curr_N in [N, N // 4]:
+        # Estimate P with  curr_N samples.
+        estimated_P = np.zeros(shape=[Nr, f_len])
+        for nr in range(Nr):
+            print('Estimating:', nr)
+            cov.estimate(x[nr][0:curr_N], f=f, p=p)
+            estimated_P[nr][:] = cov['P']
+
+        # Plot variance.
+        mv.estimate(estimated_P)
+        axarr[i_ax].plot(f, mv['var'])
+        i_ax += 1
+
+    # Label subplots & show
+    axarr[0].set_title('var for N = {}'.format(N))
+    axarr[1].set_title('var for N / 4 = {}'.format(N // 4))
+    plt.show()
+
 def filter_and_autocorr(x):
     rand_index = randint(0, np.shape(x)[0] - 1)
     cov = CovarianceMethod()
@@ -222,7 +251,7 @@ if __name__ == '__main__':
     #apply_and_plot_all(x)
 
     # 8. Show estimated variance for Covariance method.
-    #show_variance_for_covariance_method(x)
+    show_variance_for_covariance_method(x, 10)
 
     # 9. Apply Covariance method with different orders.
     #N = 256
