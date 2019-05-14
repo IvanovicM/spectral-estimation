@@ -1,5 +1,8 @@
 import numpy as np
-import math
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+sns.set()
 
 class MeanAndVar():
 
@@ -45,9 +48,43 @@ class MeanAndVar():
                 if self.N == 1:
                     curr_x = x[nr]
                 else:
-                    curr_x = x[nr][:]
+                    curr_x = x[nr][n]
                 self.var[n] += pow(curr_x - self.mean[n], 2)
         self.var /= (self.Nr - 1)
+
+    def plot(self, x_label=None):
+        '''
+            Plots estimated mean with sigma around it.
+
+            Args:
+                x_label (numpy arayy of doubes): Optional label for x-axis.
+        '''
+        if self.mean is None or self.var is None:
+            return
+
+        if x_label is None or len(x_label) != len(self.mean):
+            x_label = np.arange(0, self.N)
+
+        # Plot mean +- sigma.
+        ax1 = plt.subplot(212)
+        ax1.plot(x_label, self.mean, 'k')
+        ax1.plot(x_label, np.add(self.mean, np.sqrt(self.var)), 'r--')
+        ax1.plot(x_label, np.add(self.mean, -np.sqrt(self.var)), 'r--')
+        plt.title('mean +- sigma')
+
+        # Plot mean
+        ax2 = plt.subplot(221)
+        ax2.plot(x_label, self.mean, 'b')
+        ax2.set_title('mean')
+        plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
+
+        # Plot variancce.
+        ax3 = plt.subplot(222)
+        ax3.plot(x_label, self.var, 'g')
+        ax3.set_title('variance')
+        plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
+        
+        plt.show()
 
     def __getitem__(self, key):
         if key == 'mean':
@@ -55,5 +92,5 @@ class MeanAndVar():
         if key == 'var':
             return self.var
         if key == 'stddev':
-            return math.sqrt(self.var)
+            return np.sqrt(self.var)
         return None

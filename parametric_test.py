@@ -64,7 +64,7 @@ def model_order_selector_test():
     autocorr = ModifiedCovarianceMethod()
 
     # Estimation + variance for various p
-    max_p = 10
+    max_p = 2
     rho = np.zeros(max_p + 1)
     for p in np.arange(1, max_p + 1):
         autocorr.estimate(np.add(x, u), p=p)
@@ -75,9 +75,16 @@ def model_order_selector_test():
     selector.apply('FPE', N, max_p, rho)
     selector.plot()
 
+def mean_var_test():
+    x = np.random.normal(size=[100, 150])
+    mv = MeanAndVar()
+    mv.estimate(x)
+    mv.plot(np.arange(-200, -50))
+
 if __name__ == "__main__":
     #autocorrelation_test()
     #autocorrelation_method_test()
     #covariance_method_test()
     #modified_covariance_method_test()
-    model_order_selector_test()
+    mean_var_test()
+    #model_order_selector_test()

@@ -12,6 +12,8 @@ from classical.Autocorrelation import Autocorrelation
 from parametric.AutocorrelationMethod import AutocorrelationMethod
 from parametric.CovarianceMethod import CovarianceMethod
 from parametric.ModifiedCovarianceMethod import ModifiedCovarianceMethod
+from utils.MeanAndVar import MeanAndVar
+from utils.ModelOrderSelector import ModelOrderSelector
 
 sns.set()
 
@@ -210,11 +212,17 @@ if __name__ == '__main__':
     # 3. Apply window closing and show results
     #window_closing_on_blackman_tukey(x)
 
+    # 5. Apply FPE model order selection.
+    #model_order_selection(x, method='FPE')
+
     # 6. Filter sequence and show autocorrelation onf the result.
-    filter_and_autocorr(x)
+    #filter_and_autocorr(x)
 
     # 7. Apply a few methods on all realisations
     #apply_and_plot_all(x)
+
+    # 8. Show estimated variance for Covariance method.
+    #show_variance_for_covariance_method(x)
 
     # 9. Apply Covariance method with different orders.
     #N = 256
