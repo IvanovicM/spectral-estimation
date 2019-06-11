@@ -29,7 +29,7 @@ class AutocorrelationMethod():
                 f (numpy array of doubles): Frequence
                 p (integer): Polinomial order in A(f)
         '''
-        # Initi values
+        # Init values
         self.x = x
         if f is None:
             self.f = self.default_f

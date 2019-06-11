@@ -4,6 +4,7 @@ from parametric.Autocorrelation import Autocorrelation
 from parametric.AutocorrelationMethod import AutocorrelationMethod
 from parametric.CovarianceMethod import CovarianceMethod
 from parametric.ModifiedCovarianceMethod import ModifiedCovarianceMethod
+from parametric.Burg import Burg
 from utils.MeanAndVar import MeanAndVar
 from utils.ModelOrderSelector import ModelOrderSelector
 
@@ -53,6 +54,16 @@ def modified_covariance_method_test():
 
     print('ModifiedCovarianceMethod, var_u: ', mod_cov_method['var_u'])
 
+def burg_method_test():
+    t = np.arange(256)
+    x = np.sin(1*t + 2.8) + np.sin(2*t + 3.4)
+    u = np.random.normal(size=256)
+    burg = Burg()
+
+    # Estimation
+    burg.estimate(np.add(x, u), p=10)
+    burg.plot()
+
 def model_order_selector_test():
     N = 1000
     t = np.arange(N)
@@ -86,5 +97,6 @@ if __name__ == "__main__":
     #autocorrelation_method_test()
     #covariance_method_test()
     #modified_covariance_method_test()
-    mean_var_test()
+    burg_method_test()
+    #mean_var_test()
     #model_order_selector_test()

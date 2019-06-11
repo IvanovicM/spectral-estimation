@@ -235,7 +235,7 @@ if __name__ == '__main__':
 
     # 1. 2. 4. Apply various methods for spectral estimation
     #apply_classical_methods(x)
-    apply_parametric_methods(x)
+    #apply_parametric_methods(x)
 
     # 3. Apply window closing and show results
     #window_closing_on_blackman_tukey(x)
