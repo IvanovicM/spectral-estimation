@@ -111,7 +111,7 @@ class Burg():
 
         plt.figure()
         for k in np.arange(1, self.p + 1):
-            plt.semilogy(self.f*2*cmath.pi, self.P[k], label=k)
+            plt.semilogy(self.f, self.P[k], label='p = {}'.format(k))
         plt.title('Burg method')
         plt.legend()
         plt.xlabel('f [Hz]')

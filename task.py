@@ -10,6 +10,7 @@ from classical.AveragedPeriodogram import AveragedPeriodogram
 from classical.BlackmanTukey import BlackmanTukey
 from classical.Autocorrelation import Autocorrelation
 from parametric.AutocorrelationMethod import AutocorrelationMethod
+from parametric.Burg import Burg
 from parametric.CovarianceMethod import CovarianceMethod
 from parametric.ModifiedCovarianceMethod import ModifiedCovarianceMethod
 from utils.MeanAndVar import MeanAndVar
@@ -73,19 +74,22 @@ def apply_parametric_methods(x):
     autocorr.plot()
 
     # Covariance method
-    #rand_index = randint(0, np.shape(x)[0] - 1)
+    rand_index = randint(0, np.shape(x)[0] - 1)
     cov = CovarianceMethod()
     cov.estimate(x[rand_index][:], p=15)
     cov.plot()
     
     # Modified covariance method
-    #rand_index = randint(0, np.shape(x)[0] - 1)
+    rand_index = randint(0, np.shape(x)[0] - 1)
     mod_cov = ModifiedCovarianceMethod()
     mod_cov.estimate(x[rand_index][:], p=15)
     mod_cov.plot()
 
     # Burg method
-    # TODO
+    rand_index = randint(0, np.shape(x)[0] - 1)
+    burg = Burg()
+    burg.estimate(x[rand_index][:], p=10)
+    burg.plot()
 
 def plot_all_with_variance(estimator, x, title_0, title_1, p=None, M=None):
     Nr = np.shape(x)[0]
@@ -235,7 +239,7 @@ if __name__ == '__main__':
 
     # 1. 2. 4. Apply various methods for spectral estimation
     #apply_classical_methods(x)
-    #apply_parametric_methods(x)
+    apply_parametric_methods(x)
 
     # 3. Apply window closing and show results
     #window_closing_on_blackman_tukey(x)
