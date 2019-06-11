@@ -78,7 +78,7 @@ class AutocorrelationMethod():
             return
 
         plt.figure()
-        plt.semilogy(self.f * 2*cmath.pi, self.P)
+        plt.semilogy(self.f, self.P)
         plt.title('Autocorrelation method estimation')
         plt.xlabel('f [Hz]')
         plt.ylabel('P')

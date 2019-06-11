@@ -89,9 +89,9 @@ class CovarianceMethod():
             return
 
         plt.figure()
-        plt.plot(self.f * 2*cmath.pi, self.P)
+        plt.semilogy(self.f, self.P)
         plt.title('Covariance method estimation')
-        plt.xlabel('w [Hz]')
+        plt.xlabel('f [Hz]')
         plt.ylabel('P')
         plt.show()
 

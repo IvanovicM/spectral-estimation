@@ -57,9 +57,9 @@ class BlackmanTukey():
             return
 
         plt.figure()
-        plt.semilogy(self.f * 2*cmath.pi, self.P)
+        plt.semilogy(self.f, self.P)
         plt.title('Blackman-Tukey method estimation')
-        plt.xlabel('w [rad/sec]')
+        plt.xlabel('f [Hz]')
         plt.ylabel('P')
         plt.show()
 
