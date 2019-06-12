@@ -89,17 +89,11 @@ class Burg():
 
         # Estimate P for every order in [1, p]
         for k in np.arange(1, self.p + 1):
-            # Calculate var_u
-            var_u = 0
-            for i in range(k + 1):
-                var_u += self.a[k][i] * self.r_xx[-i]
-
-            # Calculate P
             for fi in range(len(self.f)):
                 A = 0
                 for i in range(k + 1):
                     A += self.a[k][i] * cmath.exp(-1j * 2*cmath.pi * self.f[fi] * i)
-                self.P[k][fi] = 1 / pow(abs(A), 2)
+                self.P[k][fi] = self.rho[k] / pow(abs(A), 2)
 
     def plot(self):
         '''
