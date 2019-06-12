@@ -212,12 +212,6 @@ def model_order_selection(x, method='FPE', max_order=10):
     mos.apply(method, np.shape(x)[1], max_order, rho)
     mos.plot()
 
-    mos.apply('AIC', np.shape(x)[1], max_order, rho)
-    mos.plot()
-
-    mos.apply('CAT', np.shape(x)[1], max_order, rho)
-    mos.plot()
-
 def filter_and_autocorr(x):
     rand_index = randint(0, np.shape(x)[0] - 1)
     cov = CovarianceMethod()
