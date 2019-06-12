@@ -50,7 +50,7 @@ def blackmantukey_test():
     bm.plot()
 
 if __name__ == "__main__":
-    #periodogram_test()
-    #averaged_periodogram_test()
-    #autocorrelation_test()
+    periodogram_test()
+    averaged_periodogram_test()
+    autocorrelation_test()
     blackmantukey_test()

@@ -63,8 +63,8 @@ def burg_method_test():
     burg.plot()
 
 if __name__ == "__main__":
-    #autocorrelation_test()
-    #autocorrelation_method_test()
-    #covariance_method_test()
-    #modified_covariance_method_test()
+    autocorrelation_test()
+    autocorrelation_method_test()
+    covariance_method_test()
+    modified_covariance_method_test()
     burg_method_test()

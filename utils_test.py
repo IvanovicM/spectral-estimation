@@ -34,5 +34,5 @@ def mean_var_test():
     mv.plot(np.arange(-200, -50))
 
 if __name__ == "__main__":
-    #mean_var_test()
+    mean_var_test()
     model_order_selector_test()
