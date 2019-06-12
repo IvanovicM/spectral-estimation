@@ -78,7 +78,7 @@ def apply_parametric_methods(x):
     cov = CovarianceMethod()
     cov.estimate(x[rand_index][:], p=15)
     cov.plot()
-    
+        
     # Modified covariance method
     rand_index = randint(0, np.shape(x)[0] - 1)
     mod_cov = ModifiedCovarianceMethod()
@@ -88,7 +88,7 @@ def apply_parametric_methods(x):
     # Burg method
     rand_index = randint(0, np.shape(x)[0] - 1)
     burg = Burg()
-    burg.estimate(x[rand_index][:], p=10)
+    burg.estimate(x[rand_index][:], p=40)
     burg.plot()
 
 def plot_all_with_variance(estimator, x, title_0, title_1, p=None, M=None):
@@ -196,10 +196,32 @@ def show_variance_for_covariance_method(x, p):
     axarr[1].set_title('var for N / 4 = {}'.format(N // 4))
     plt.show()
 
+def model_order_selection(x, method='FPE', max_order=10):
+    # Apply Covariance method for all orders.
+    rand_index = randint(0, np.shape(x)[0] - 1)
+    cov = CovarianceMethod()
+
+    rho = np.zeros(max_order + 1)
+    for k in np.arange(1, max_order + 1):
+        print('Applying for k={}'.format(k))
+        cov.estimate(x[rand_index][:], p=k)
+        rho[k] = cov['var_u']
+
+    # Apply model order selection and plot results.
+    mos = ModelOrderSelector()
+    mos.apply(method, np.shape(x)[1], max_order, rho)
+    mos.plot()
+
+    mos.apply('AIC', np.shape(x)[1], max_order, rho)
+    mos.plot()
+
+    mos.apply('CAT', np.shape(x)[1], max_order, rho)
+    mos.plot()
+
 def filter_and_autocorr(x):
     rand_index = randint(0, np.shape(x)[0] - 1)
     cov = CovarianceMethod()
-    cov.estimate(x[rand_index][:], p=15)
+    cov.estimate(x[rand_index][:], p=5)
     
     # Apply filter
     b = np.ndarray.flatten(cov['a'])
@@ -239,13 +261,13 @@ if __name__ == '__main__':
 
     # 1. 2. 4. Apply various methods for spectral estimation
     #apply_classical_methods(x)
-    apply_parametric_methods(x)
+    #apply_parametric_methods(x)
 
     # 3. Apply window closing and show results
     #window_closing_on_blackman_tukey(x)
 
     # 5. Apply FPE model order selection.
-    #model_order_selection(x, method='FPE')
+    model_order_selection(x, method='FPE', max_order=40)
 
     # 6. Filter sequence and show autocorrelation onf the result.
     #filter_and_autocorr(x)

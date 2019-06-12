@@ -17,7 +17,7 @@ class ModelOrderSelector():
             Args:
                 method (string): Method. It can be 'FPE', 'AIC' and 'CAT'.
                 N (integer): Number of samples in sequence used for spectral estimation.
-                max_order (integer): Maxmum order that should the method be applied to.
+                max_order (integer): Maximum order that should the method be applied to.
                 rho (array of doubles): White noise variance estimation for each order in interval [1, max_order]
         '''
         if method is None:
@@ -45,9 +45,16 @@ class ModelOrderSelector():
 
         plt.figure()
         plt.plot(np.arange(1, self.max_order + 1), self.method_values[1:])
+
+        min_indx = np.argmin(self.method_values[1:])
+        k_opt = min_indx + 1
+        plt.plot(k_opt, self.method_values[k_opt], 'ro',
+                 label='Min value for k_opt={}'.format(k_opt))
+
         plt.title('Criterion in model order selection')
         plt.xlabel('k')
         plt.ylabel('{}[k]'.format(self.method))
+        plt.legend()
         plt.show()
 
     def _apply_for_given_k(self, k, rho_k):
