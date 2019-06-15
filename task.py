@@ -197,19 +197,13 @@ def show_variance_for_covariance_method(x, p):
     plt.show()
 
 def model_order_selection(x, method='FPE', max_order=10):
-    # Apply Covariance method for all orders.
+    # Apply order selection on Covariance method.
     rand_index = randint(0, np.shape(x)[0] - 1)
     cov = CovarianceMethod()
 
-    rho = np.zeros(max_order + 1)
-    for k in np.arange(1, max_order + 1):
-        print('Applying for k={}'.format(k))
-        cov.estimate(x[rand_index][:], p=k)
-        rho[k] = cov['var_u']
-
     # Apply model order selection and plot results.
     mos = ModelOrderSelector()
-    mos.apply(method, np.shape(x)[1], max_order, rho)
+    mos.apply(method, x[rand_index][:], max_order, cov)
     mos.plot()
 
 def filter_and_autocorr(x):

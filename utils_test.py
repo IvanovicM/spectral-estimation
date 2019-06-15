@@ -6,25 +6,16 @@ from utils.ModelOrderSelector import ModelOrderSelector
 
 def model_order_selector_test():
     N = 256
-    t = np.arange(N)
     u = np.random.normal(size=N)
 
     b = [2,3]
     a = [1,0.2]
     x = signal.lfilter(b, a, u)
 
+    # Apply order selection on Covariance method
     selector = ModelOrderSelector()
     cov = CovarianceMethod()
-
-    # Estimation + variance for various p
-    max_p = 20
-    rho = np.zeros(max_p + 1)
-    for p in np.arange(1, max_p + 1):
-        cov.estimate(x, p=p)
-        rho[p] = cov['var_u']
-
-    # Apply order selection
-    selector.apply('CAT', N, max_p, rho)
+    selector.apply('CAT', x, 30, cov)
     selector.plot()
 
 def mean_var_test():
