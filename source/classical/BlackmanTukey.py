@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import scipy.signal as signal
 import csv
-from classical.Autocorrelation import Autocorrelation
+from ..utils.Autocorrelation import Autocorrelation
 
 sns.set()
 

@@ -5,16 +5,16 @@ import matplotlib.pyplot as plt
 from random import randint
 from scipy import signal
 
-from classical.Periodogram import Periodogram
-from classical.AveragedPeriodogram import AveragedPeriodogram
-from classical.BlackmanTukey import BlackmanTukey
-from classical.Autocorrelation import Autocorrelation
-from parametric.AutocorrelationMethod import AutocorrelationMethod
-from parametric.Burg import Burg
-from parametric.CovarianceMethod import CovarianceMethod
-from parametric.ModifiedCovarianceMethod import ModifiedCovarianceMethod
-from utils.MeanAndVar import MeanAndVar
-from utils.ModelOrderSelector import ModelOrderSelector
+from ..classical.Periodogram import Periodogram
+from ..classical.AveragedPeriodogram import AveragedPeriodogram
+from ..classical.BlackmanTukey import BlackmanTukey
+from ..parametric.AutocorrelationMethod import AutocorrelationMethod
+from ..parametric.Burg import Burg
+from ..parametric.CovarianceMethod import CovarianceMethod
+from ..parametric.ModifiedCovarianceMethod import ModifiedCovarianceMethod
+from ..utils.Autocorrelation import Autocorrelation
+from ..utils.MeanAndVar import MeanAndVar
+from ..utils.ModelOrderSelector import ModelOrderSelector
 
 sns.set()
 

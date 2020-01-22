@@ -3,7 +3,7 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import scipy.signal as signal
-from parametric.Autocorrelation import Autocorrelation
+from ..utils.Autocorrelation import Autocorrelation
 
 sns.set()
 

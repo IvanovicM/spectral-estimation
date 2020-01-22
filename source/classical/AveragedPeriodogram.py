@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import scipy.signal as signal
 import csv
-from classical.Periodogram import Periodogram
+from .Periodogram import Periodogram
 
 sns.set()
 

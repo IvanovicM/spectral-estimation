@@ -106,3 +106,4 @@ venv.bak/
 # data & img
 /data/
 /img/
+.DS_Store

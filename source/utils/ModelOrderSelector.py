@@ -12,12 +12,13 @@ class ModelOrderSelector():
 
     def apply(self, method, x, max_order, estimator):
         '''
-            Applies method for model order selection by calculationg function value for each order in given interval.
+            Applies method for model order selection by calculationg function
+            value for each order in given interval.
 
             Args:
                 method (string): Method. It can be 'FPE', 'AIC' and 'CAT'.
                 x (array of doubles): Signal.
-                max_order (integer): Maximum order that should the method be applied to.
+                max_order (integer): Maximum order for the method.
                 estimator (parametric estimator): One of parametric estimators.
         '''
         if method is None or estimator is None:
