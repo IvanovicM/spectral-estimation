@@ -16,8 +16,8 @@ class MeanAndVar():
 
             Args:
                 x (numpy matrix of doubles): Given reaslisations of a proces.
-                                             The first dimension is number of reaslisations.
-                                             Second dimension is number of samples per realisaton.
+                    The first dimension is number of reaslisations.
+                    Second dimension is number of samples per realisaton.
         '''
         if x is None:
             return
