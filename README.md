@@ -36,7 +36,7 @@ Window closing is the method for determining a suitable window size for Blackman
 |:---:|:---:|
 | Window closing on Blackman-Tukey Method | Order Selection Illustrated |
 
-## How to run the tests?
+# How to run the tests?
 
 To run any test simply go to the directory above 'source' and type the following command in your terminal.
 
