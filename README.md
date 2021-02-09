@@ -30,7 +30,7 @@ The results for one classical and one parametric method are shown below.
     
 It's very important to choose the right parameters for an accurate estimation.
 
-"Window closing" is a method for determining a suitable window size for the Blackman-Tukey spectral estimator. On the other hand, all of the prametric methods have a problem of determining a proper order of a model -- p. Criterions that address this problem, FPE, AIC and CAT, are all implemented in this projects, and could be found in the ```source/utils/ModelOrderSelector.py``` script.
+"Window closing" is a method for determining a suitable window size for the Blackman-Tukey spectral estimator. On the other hand, all of the prametric methods have a problem of determining a proper order of a model -- p. Criterions that address this problem, FPE, AIC and CAT, are all implemented in this projects, and could be found in the ```source/utils/ModelOrderSelector.py``` file.
 
 | <img src="images/bmt_window_closing.png"> | <img src="images/order_selection.png">|
 |:---:|:---:|
